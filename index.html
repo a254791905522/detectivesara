@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detective Sara's Hidden Object — Mystery &amp; Hidden Clues</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #141018;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 50% -10%, rgba(212, 168, 83, 0.14), transparent 50%),
+                radial-gradient(ellipse 50% 40% at 100% 50%, rgba(139, 41, 66, 0.12), transparent 45%),
+                radial-gradient(ellipse 45% 35% at 0% 70%, rgba(90, 120, 160, 0.08), transparent 40%),
+                linear-gradient(180deg, #0c0a10 0%, #18141f 45%, #141018 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+            color: #e8e2d8;
+        }
+
+        .fog {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(255, 245, 230, 0.06) 0%, transparent 25%),
+                radial-gradient(circle at 70% 60%, rgba(212, 168, 83, 0.05) 0%, transparent 30%);
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            background: linear-gradient(165deg, rgba(35, 28, 42, 0.96) 0%, rgba(20, 16, 26, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 8px;
+            border: 1px solid rgba(212, 168, 83, 0.28);
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+                0 32px 80px rgba(0, 0, 0, 0.55),
+                0 0 100px rgba(139, 41, 66, 0.08);
+            max-width: 600px;
+            width: 100%;
+            padding: 42px 38px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.6), transparent);
+            border-radius: 0 0 2px 2px;
+        }
+
+        .game-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            line-height: 1;
+            background: radial-gradient(circle at 35% 30%, rgba(212, 168, 83, 0.2) 0%, transparent 55%),
+                linear-gradient(145deg, rgba(139, 41, 66, 0.35) 0%, rgba(30, 24, 38, 0.9) 100%);
+            border: 2px solid rgba(212, 168, 83, 0.45);
+            border-radius: 50%;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            color: #f5f0e8;
+        }
+
+        h1 .gold {
+            color: #d4a853;
+            text-shadow: 0 0 40px rgba(212, 168, 83, 0.25);
+        }
+
+        .subtitle {
+            color: #9a8f82;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            background: rgba(139, 41, 66, 0.2);
+            border: 1px solid rgba(212, 168, 83, 0.25);
+            color: #c9b896;
+            padding: 7px 12px;
+            border-radius: 2px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .description {
+            text-align: left;
+            color: #b8aea2;
+            line-height: 1.85;
+            font-size: 0.97rem;
+            margin-bottom: 24px;
+        }
+
+        .description strong {
+            color: #ebe4d9;
+            font-weight: 700;
+        }
+
+        .briefing {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 4px;
+            border-left: 3px solid #d4a853;
+            padding: 18px 20px;
+            margin-bottom: 24px;
+        }
+
+        .briefing h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #d4a853;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .briefing ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .briefing li {
+            color: #b8aea2;
+            padding: 5px 0 5px 22px;
+            position: relative;
+            font-size: 0.93rem;
+            line-height: 1.55;
+        }
+
+        .briefing li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #8b2942;
+            font-size: 0.55rem;
+            top: 0.65em;
+        }
+
+        .features {
+            text-align: left;
+            margin-bottom: 28px;
+        }
+
+        .features h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #d4a853;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            color: #b8aea2;
+            padding: 7px 0 7px 26px;
+            position: relative;
+            font-size: 0.94rem;
+            line-height: 1.58;
+        }
+
+        .features li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #d4a853;
+            font-size: 0.55rem;
+            top: 0.85em;
+        }
+
+        .app-store-button {
+            display: inline-block;
+            background: linear-gradient(145deg, #8b2942 0%, #5c1c2e 100%);
+            color: #f5f0e8;
+            padding: 15px 36px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.98rem;
+            font-weight: 700;
+            font-family: 'Source Sans 3', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(212, 168, 83, 0.35);
+            box-shadow: 0 12px 32px rgba(139, 41, 66, 0.35);
+        }
+
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(139, 41, 66, 0.45);
+            color: #fff;
+        }
+
+        .footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 168, 83, 0.15);
+            font-size: 0.84rem;
+            color: #6d655c;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: #c9a227;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+            color: #d4a853;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.35rem; }
+            .container { padding: 32px 22px; }
+            .game-icon { width: 88px; height: 88px; font-size: 42px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fog" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="container">
+        <div class="game-icon" role="img" aria-label="Magnifying glass">🔍</div>
+        <h1><span class="gold">Detective Sara's</span> Hidden Object</h1>
+        <p class="subtitle">Hidden clues · Mystery game</p>
+
+        <div class="badges">
+            <span class="badge">Free</span>
+            <span class="badge">Puzzle</span>
+            <span class="badge">iPhone &amp; iPad</span>
+            <span class="badge">4+</span>
+        </div>
+
+        <div class="description">
+            <p>Search <strong>stunning handcrafted scenes</strong>, uncover cleverly hidden objects, and beat the clock. <strong>Detective Sara's Hidden Object</strong> is a relaxing yet challenging adventure where sharp eyes and calm focus are your best tools—step into a world of mystery, beautiful detail, and puzzles that reward every careful look.</p>
+        </div>
+
+        <div class="briefing">
+            <h3>How to play</h3>
+            <ul>
+                <li>Find every hidden object before time runs out.</li>
+                <li>Tap with care—mistakes cost you precious seconds.</li>
+                <li>Clear levels to unlock new scenes and tougher challenges.</li>
+                <li>Train observation and concentration in short, satisfying sessions.</li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <h3>Case file highlights</h3>
+            <ul>
+                <li><strong>Hand-built scenes</strong> rich with atmosphere and hidden detail.</li>
+                <li><strong>Many levels</strong> with difficulty that grows as you progress.</li>
+                <li><strong>Timed rounds</strong> for an extra spark of excitement.</li>
+                <li><strong>Smooth, intuitive controls</strong> built for touch.</li>
+                <li><strong>All ages welcome</strong>—puzzle fans and casual detectives alike.</li>
+            </ul>
+        </div>
+
+        <a href="https://apps.apple.com/us/app/detective-saras-hidden-object/id1022321386?uo=4" class="app-store-button" target="_blank" rel="noopener noreferrer">
+            Download on the App Store
+        </a>
+
+        <div class="footer">
+            <a href="privacy.html">Privacy Policy</a> · Detective Sara's Hidden Object
+        </div>
+    </div>
+</body>
+
+</html>

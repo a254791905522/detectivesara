@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy — Detective Sara's Hidden Object</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #141018;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 168, 83, 0.1), transparent 50%),
+                linear-gradient(180deg, #0c0a10 0%, #18141f 100%);
+            color: #b8aea2;
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 22px 80px;
+        }
+
+        .dossier {
+            border: 1px solid rgba(212, 168, 83, 0.35);
+            border-radius: 4px;
+            background: linear-gradient(180deg, rgba(28, 22, 34, 0.98) 0%, rgba(18, 14, 22, 0.99) 100%);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .dossier-header {
+            padding: 28px 28px 22px;
+            border-bottom: 1px dashed rgba(212, 168, 83, 0.25);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .stamp {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            color: #8b2942;
+            border: 2px solid rgba(139, 41, 66, 0.55);
+            padding: 6px 14px;
+            margin-bottom: 16px;
+            transform: rotate(-2deg);
+            text-transform: uppercase;
+        }
+
+        .dossier-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f5f0e8;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+
+        .dossier-header .app-line {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #d4a853;
+        }
+
+        .dossier-header .meta {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: #6d655c;
+            font-weight: 600;
+        }
+
+        .dossier-body {
+            padding: 0;
+        }
+
+        section {
+            padding: 26px 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .num {
+            float: left;
+            width: 32px;
+            height: 32px;
+            margin-right: 14px;
+            margin-top: 2px;
+            background: rgba(212, 168, 83, 0.15);
+            border: 1px solid rgba(212, 168, 83, 0.35);
+            border-radius: 2px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #d4a853;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section .content {
+            overflow: hidden;
+        }
+
+        section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: #ebe4d9;
+            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+        }
+
+        section p {
+            font-size: 0.96rem;
+            margin-bottom: 10px;
+        }
+
+        section p:last-child {
+            margin-bottom: 0;
+        }
+
+        section strong {
+            color: #ebe4d9;
+            font-weight: 700;
+        }
+
+        .highlight {
+            background: rgba(139, 41, 66, 0.18);
+            border-left: 3px solid #8b2942;
+            padding: 16px 18px;
+            margin-top: 14px;
+            font-size: 0.94rem;
+        }
+
+        .highlight strong {
+            color: #d4a853;
+        }
+
+        ul.plain {
+            margin: 12px 0 0;
+            padding-left: 1.15rem;
+        }
+
+        ul.plain li {
+            margin-bottom: 8px;
+            font-size: 0.94rem;
+        }
+
+        ul.plain li:last-child {
+            margin-bottom: 0;
+        }
+
+        .back {
+            margin-top: 36px;
+            text-align: center;
+        }
+
+        .back a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #d4a853;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(212, 168, 83, 0.4);
+            padding-bottom: 2px;
+        }
+
+        .back a:hover {
+            color: #e8c86a;
+            border-bottom-color: #e8c86a;
+        }
+
+        @media (max-width: 640px) {
+            .page { padding: 28px 16px 64px; }
+            .dossier-header { padding: 22px 18px; }
+            .dossier-header h1 { font-size: 1.25rem; }
+            section { padding: 22px 18px; }
+            .num { float: none; margin-bottom: 10px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="dossier">
+            <header class="dossier-header">
+                <span class="stamp">Confidential</span>
+                <h1>Privacy overview</h1>
+                <p class="app-line">Detective Sara's Hidden Object</p>
+                <p class="meta">Last updated: April 2026</p>
+            </header>
+
+            <div class="dossier-body">
+                <section>
+                    <span class="num" aria-hidden="true">1</span>
+                    <div class="content">
+                        <h2>Scope</h2>
+                        <p>This document summarizes privacy-related information for <strong>Detective Sara's Hidden Object</strong>, the puzzle game distributed on Apple's App Store. Platform rules and Apple's own policies also apply when you download or update the app.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <span class="num" aria-hidden="true">2</span>
+                    <div class="content">
+                        <h2>Data collection (per store listing)</h2>
+                        <p>The app's App Store privacy label currently states that <strong>the developer does not collect data</strong> from this app for the categories Apple lists under App Privacy. Practices can change with future updates; check the latest listing on the App Store for the authoritative view.</p>
+                        <div class="highlight">
+                            <strong>Note:</strong> The game is marked as containing advertising. Ad networks may process data according to their own policies and your device settings—review system ad tracking and privacy options on your iPhone or iPad if you use ad-supported features.
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <span class="num" aria-hidden="true">3</span>
+                    <div class="content">
+                        <h2>Apple &amp; Game Center</h2>
+                        <p>Installs, updates, and App Store interactions are handled by <strong>Apple</strong>. If you use <strong>Game Center</strong> (for example leaderboards), Apple processes related account and gameplay data under Apple's terms. This page does not replace Apple's documentation.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <span class="num" aria-hidden="true">4</span>
+                    <div class="content">
+                        <h2>On-device data</h2>
+                        <p>Like most mobile games, the app may keep <strong>local data</strong> on your device—such as level progress or preferences—so play works without constant network use. Unless a future version clearly states otherwise, that information ordinarily stays on your device.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <span class="num" aria-hidden="true">5</span>
+                    <div class="content">
+                        <h2>Age rating &amp; families</h2>
+                        <p>The game is rated <strong>4+</strong>. Parents and guardians can use Apple's Screen Time, Family Sharing, and purchase controls to manage access and spending.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <span class="num" aria-hidden="true">6</span>
+                    <div class="content">
+                        <h2>Changes</h2>
+                        <p>This overview may be revised to stay accurate with the app and store listing. The <strong>“Last updated”</strong> date above will change when the text is edited. For legal or data questions specific to the product, use the support or report options Apple provides on the App Store page for the app.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <p class="back"><a href="index.html">Return to game overview</a></p>
+    </div>
+</body>
+
+</html>
